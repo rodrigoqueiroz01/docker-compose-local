@@ -27,7 +27,7 @@ $ git clone https://github.com/rodrigoqueiroz01/docker-compose-local.git
 - Execute: ``$ docker-compose up -d``
 - Esse comando irá executar o Dockerfile, criar as imagens e buscar todas as informações que estão localizadas em "datasources.sql" para gerar os banco de dados.
 
-> Obs: No Windows, o Docker Desktop precisa estar em execução.
+> No Windows, o Docker Desktop precisa estar em execução.
 
 ## Para criar e executar os bancos gerados:
 - No DataGrip:
