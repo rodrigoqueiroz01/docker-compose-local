@@ -1,8 +1,9 @@
 version: '3.8'
 
 services:
+  # Database
   postgres:
-    build: postgres
+    build: services/postgres
     container_name: postgres
     restart: always
     ports:
@@ -10,26 +11,22 @@ services:
     volumes:
       - '/opt/volumes/local/postgres/data:/var/lib/postgresql/data:rq'
     env_file:
-      - postgres/postgres.env
+      - env/postgres.env
+    networks:
+      - dev-local-network
 
-  mysql:
-    build: mysql
-    container_name: mysql
+  # Security
+  keycloak:
+    build: services/keycloak
+    container_name: keycloak
     restart: always
     ports:
-      - '3306:3306'
-    volumes:
-      - '/opt/volumes/local/mysql/data:/var/lib/mysql mysql/mysql-server'
+      - "8180:8080"
     env_file:
-      - mysql/mysql.env
+      - env/keycloak.env
+    networks:
+      - dev-local-network
 
-  mongodb:
-    build: mongo
-    container_name: mongo
-    restart: always
-    ports:
-      - '27017:27017'
-    volumes:
-      - '/opt/volumes/local/dados/mongo/db:/data/db:rq'
-    env_file:
-      - mongo/mongo.env
+networks:
+  dev-local-network:
+    driver: bridge
